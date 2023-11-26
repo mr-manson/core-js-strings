@@ -345,6 +345,8 @@ function isPalindrome(str) {
  * @param {string} sentence - The input sentence.
  * @returns {string} - The longest word in the sentence.
  *
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *
  * @example:
  *   findLongestWord('The quick brown fox') => 'quick'
  *   findLongestWord('A long and winding road') => 'winding'
@@ -372,8 +374,13 @@ function findLongestWord(/* sentence */) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  const words = str.split(' ');
+  const reWords = [];
+  for (let i = 0; i < words.length; i += 1) {
+    reWords.push(words[i].split('').reverse().join(''));
+  }
+  return reWords.join(' ');
 }
 
 /**
@@ -387,8 +394,20 @@ function reverseWords(/* str */) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  const words = str.split(' ');
+  const reWords = words
+    .map((word) =>
+      word
+        .split('')
+        .map((char) =>
+          char === char.toUpperCase() ? char.toLowerCase() : char.toUpperCase()
+        )
+        .join('')
+    )
+    .join(' ');
+
+  return reWords;
 }
 
 /**
@@ -404,8 +423,8 @@ function invertCase(/* str */) {
  *   getStringFromTemplate('John','Doe') => 'Hello, John Doe!'
  *   getStringFromTemplate('Chuck','Norris') => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -418,8 +437,8 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  return value.slice(7, -1);
 }
 
 /**
@@ -433,8 +452,8 @@ function extractNameFromTemplate(/* value */) {
  *   unbracketTag('<span>') => 'span'
  *   unbracketTag('<a>') => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.slice(1, -1);
 }
 
 /**
@@ -452,8 +471,8 @@ function unbracketTag(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -462,6 +481,8 @@ function extractEmails(/* str */) {
  *
  * @param {string} str - The input string.
  * @return {string} - The ROT13 encoded string.
+ *
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  *
  * @example
  *
@@ -491,6 +512,8 @@ function encodeToRot13(/* str */) {
  *
  * @param {string} value - The card value.
  * @return {number} - The zero-based index.
+ *
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  *
  * @example
  *   'A♣' => 0
