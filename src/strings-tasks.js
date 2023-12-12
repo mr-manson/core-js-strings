@@ -145,15 +145,18 @@ function repeatString(str, times) {
  * @param {string} value - The substring to remove from the string.
  * @return {string} - The string with the first occurrence of the substring removed.
  *
- * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- *
  * @example
  *   removeFirstOccurrences('To be or not to be', 'be') => 'To  or not to be'.
  *   removeFirstOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  const index = str.indexOf(value);
+  if (index === -1) {
+    return str;
+  }
+
+  return str.slice(0, index) + str.slice(index + value.length);
 }
 
 /**
@@ -163,15 +166,17 @@ function removeFirstOccurrences(/* str, value */) {
  * @param {string} value - The substring to remove from the string.
  * @return {string} - The string with the last occurrence of the substring removed.
  *
- * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- *
  * @example
  *   removeLastOccurrences('To be or not to be', 'be') => 'To be or not to '.
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  const index = str.lastIndexOf(value);
+  if (index === -1) {
+    return str;
+  }
+  return str.slice(0, index) + str.slice(index + value.length);
 }
 
 /**
@@ -345,23 +350,17 @@ function isPalindrome(str) {
  * @param {string} sentence - The input sentence.
  * @returns {string} - The longest word in the sentence.
  *
- * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- *
  * @example:
  *   findLongestWord('The quick brown fox') => 'quick'
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {
-  throw new Error('Not implemented');
-  // const words = sentence.split(' ');
-  // let longest = words[0];
-  // for (let i = 1; i < words; i += 1) {
-  //   if (words[i].length > longest.length) {
-  //     longest = words[i];
-  //   }
-  // }
-  // return longest;
+function findLongestWord(sentence) {
+  const words = sentence.split(' ');
+  const longestWord = words.reduce((longest, currentWord) => {
+    return currentWord.length > longest.length ? currentWord : longest;
+  }, '');
+  return longestWord;
 }
 
 /**
@@ -493,8 +492,17 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const input = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const output = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+
+  return str
+    .split('')
+    .map((letter) => {
+      const position = input.indexOf(letter);
+      return position > -1 ? output[position] : letter;
+    })
+    .join('');
 }
 
 /**
@@ -513,8 +521,6 @@ function encodeToRot13(/* str */) {
  * @param {string} value - The card value.
  * @return {number} - The zero-based index.
  *
- * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- *
  * @example
  *   'A♣' => 0
  *   '2♣' => 1
@@ -523,8 +529,63 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const cards = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
+
+  return cards.indexOf(value);
 }
 
 module.exports = {
